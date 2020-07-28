@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: APISearch
+  cloud:
+    consul:
+      host: "${CONSUL_AGENT:localhost}"
+      port: "${CONSUL_PORT:8500}"
+      discovery:
+        register: false
+  data:
+    elasticsearch:
+      cluster-name: api-search
+      cluster-nodes: localhost:9300
+
+server:
+  port: 8080
+  servlet:
+    context-path: "/${spring.application.name}"
+
+logging:
+  level:
+    root: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health, env, prometheus"
+      base-path: "/"
+      path-mapping:
+        prometheus: "internal/metrics"
+        health: "selftest"
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
