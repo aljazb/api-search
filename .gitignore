@@ -1,5 +1,6 @@
 Zbiratelj/.idea/**
 Zbiratelj/target/**
+Iskalnik/.idea/**
 
 *.DS_Store
 
